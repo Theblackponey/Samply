@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel - Sonus</title>
+    <link rel="icon" type="image/png" sizes="1024x1024" href="/assets/samply-icon.png?v=3" />
+    <link rel="shortcut icon" type="image/png" href="/assets/samply-icon.png?v=3" />
+    <link rel="apple-touch-icon" href="/assets/samply-icon.png?v=3" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/src/site.js"></script>
+    <script type="module" src="/src/admin.js"></script>
+  </head>
+  <body data-page="admin">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span>Sonus</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" data-nav="home">Home</a>
+        <a href="/download/" data-nav="download">Download</a>
+        <a href="/patch-notes/" data-nav="patch-notes">Patch notes</a>
+      </nav>
+      <div class="site-actions" id="site-nav-actions"></div>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-head">
+        <div>
+          <p class="section-kicker">Admin</p>
+          <h1>Feedback inbox</h1>
+          <p id="admin-subtitle">Loading feedback messages.</p>
+        </div>
+        <button class="btn btn-accent" id="admin-refresh-btn" type="button">Refresh</button>
+      </section>
+
+      <section class="admin-locked" id="admin-locked" hidden>
+        <h2>Admin access required.</h2>
+        <p>This page is only available to accounts with administrator access.</p>
+        <a class="btn btn-muted" href="/dashboard/">Back to dashboard</a>
+      </section>
+
+      <section class="admin-password-panel" id="admin-password-panel" hidden>
+        <article class="admin-options-panel">
+          <p class="panel-kicker">Protected area</p>
+          <h2>Admin password</h2>
+          <p class="admin-option-copy">Enter the admin password to unlock this browser session.</p>
+          <form class="admin-version-form" id="admin-password-form">
+            <label>
+              <span>Password</span>
+              <input id="admin-password-input" type="password" autocomplete="current-password" required />
+            </label>
+            <label class="admin-checkbox-label">
+              <input id="admin-password-remember" type="checkbox" />
+              <span>Remember this browser</span>
+            </label>
+            <button class="btn btn-accent" id="admin-password-submit" type="submit">Unlock admin panel</button>
+            <p class="form-status" id="admin-password-status" aria-live="polite"></p>
+          </form>
+        </article>
+      </section>
+
+      <section class="admin-content" id="admin-content" hidden>
+        <section class="admin-home" id="admin-home">
+          <button class="admin-entry-card" type="button" data-admin-view="feedback">
+            <span>Mails</span>
+            <strong>Feedback inbox</strong>
+            <em>Open user messages, bug reports, and feature requests.</em>
+          </button>
+          <button class="admin-entry-card" type="button" data-admin-view="options">
+            <span>Admin</span>
+            <strong>Admin options</strong>
+            <em>Manage the public app version and update prompt.</em>
+          </button>
+        </section>
+
+        <section class="admin-view" id="admin-feedback-view" hidden>
+          <div class="admin-view-bar">
+            <button class="admin-back-btn" type="button" data-admin-view="home">Back</button>
+            <div class="admin-tabs" role="tablist" aria-label="Feedback filters">
+              <button class="active" type="button" data-admin-filter="all">All <span id="admin-count-all">0</span></button>
+              <button type="button" data-admin-filter="new">Unread <span id="admin-count-new">0</span></button>
+              <button type="button" data-admin-filter="read">Opened <span id="admin-count-read">0</span></button>
+            </div>
+          </div>
+
+          <div class="admin-layout">
+            <div class="feedback-inbox" id="feedback-inbox"></div>
+            <article class="feedback-detail" id="feedback-detail">
+              <p class="panel-kicker">Message</p>
+              <h2>Select a feedback item.</h2>
+              <p>Open a message from the left to read it. Opening marks it as read.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-view" id="admin-options-view" hidden>
+          <div class="admin-view-bar">
+            <button class="admin-back-btn" type="button" data-admin-view="home">Back</button>
+          </div>
+
+          <article class="admin-options-panel">
+            <p class="panel-kicker">Release version</p>
+            <h2>Current version <span id="admin-current-version">v-</span></h2>
+            <p class="admin-option-copy">Publishing a new version uploads the platform installers and updates the current version. Download availability is managed separately below.</p>
+
+            <form class="admin-version-form" id="admin-version-form">
+              <label>
+                <span>New version</span>
+                <input id="admin-version-input" type="text" inputmode="text" placeholder="1.0b" required />
+              </label>
+              <label>
+                <span>Release notes</span>
+                <textarea id="admin-version-notes" rows="5" placeholder="One note per line"></textarea>
+              </label>
+              <div class="admin-release-files" aria-label="Release installer files">
+                <label>
+                  <span>macOS ARM64 DMG</span>
+                  <input id="admin-zip-macos-arm64" name="zip_macos_arm64" type="file" accept=".dmg,.zip,application/x-apple-diskimage,application/zip" required />
+                </label>
+                <label>
+                  <span>macOS Intel DMG</span>
+                  <input id="admin-zip-macos-intel" name="zip_macos_intel" type="file" accept=".dmg,.zip,application/x-apple-diskimage,application/zip" required />
+                </label>
+                <label>
+                  <span>Windows installer</span>
+                  <input id="admin-zip-windows" name="zip_windows" type="file" accept=".exe,.zip,application/vnd.microsoft.portable-executable,application/x-msdownload,application/zip" required />
+                </label>
+              </div>
+              <button class="btn btn-accent" id="admin-version-submit" type="submit">Publish version</button>
+              <p class="form-status" id="admin-version-status" aria-live="polite"></p>
+            </form>
+
+            <section class="admin-release-history" aria-label="Published versions">
+              <div>
+                <p class="panel-kicker">Published versions</p>
+                <h3>Release history</h3>
+              </div>
+              <div class="admin-release-list" id="admin-release-list">
+                <p class="admin-option-copy">Loading versions.</p>
+              </div>
+            </section>
+          </article>
+
+          <article class="admin-options-panel">
+            <p class="panel-kicker">Download page</p>
+            <h2>Platform availability</h2>
+            <p class="admin-option-copy">Choose which uploaded platform builds are downloadable. Disabled platforms stay visible on the Download page as Soon.</p>
+
+            <form class="admin-version-form" id="admin-download-availability-form">
+              <div class="admin-release-availability" aria-label="Platform availability">
+                <p class="admin-release-availability-title">Available on download page</p>
+                <label class="admin-checkbox-label">
+                  <input id="admin-available-macos-arm64" type="checkbox" checked />
+                  <span>macOS ARM64</span>
+                </label>
+                <label class="admin-checkbox-label">
+                  <input id="admin-available-macos-intel" type="checkbox" checked />
+                  <span>macOS Intel</span>
+                </label>
+                <label class="admin-checkbox-label">
+                  <input id="admin-available-windows" type="checkbox" checked />
+                  <span>Windows</span>
+                </label>
+              </div>
+              <button class="btn btn-accent" id="admin-download-availability-submit" type="submit">Save availability</button>
+              <p class="form-status" id="admin-download-availability-status" aria-live="polite"></p>
+            </form>
+          </article>
+
+          <article class="admin-options-panel">
+            <p class="panel-kicker">Launch gate</p>
+            <h2>Website launch <span id="admin-launch-state">Loading</span></h2>
+            <p class="admin-option-copy">Set the exact date and minute when checkout unlocks and the homepage returns to the normal hero.</p>
+
+            <form class="admin-version-form" id="admin-launch-form">
+              <label>
+                <span>Launch date and time</span>
+                <input id="admin-launch-at-input" type="datetime-local" required />
+              </label>
+              <label class="admin-checkbox-label">
+                <input id="admin-launch-enabled-input" type="checkbox" checked />
+                <span>Enable countdown and checkout lock before this date</span>
+              </label>
+              <button class="btn btn-accent" id="admin-launch-submit" type="submit">Save launch gate</button>
+              <p class="form-status" id="admin-launch-status" aria-live="polite"></p>
+            </form>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <a class="brand small" href="/"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span>Sonus</span></a>
+        <span>© 2026 Sonus. All rights reserved.</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/cookies/">Cookies</a>
+        <a href="/refund/">Refunds</a>
+        <a href="/legal/">Legal Notice</a>
+      </nav>
+    </footer>
+  </body>
+</html>

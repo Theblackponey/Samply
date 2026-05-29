@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pricing - Sonus</title>
+    <meta name="description" content="Buy Sonus lifetime access for $49 and unlock the native sample browser for macOS." />
+    <link rel="icon" type="image/png" sizes="1024x1024" href="/assets/samply-icon.png?v=3" />
+    <link rel="shortcut icon" type="image/png" href="/assets/samply-icon.png?v=3" />
+    <link rel="apple-touch-icon" href="/assets/samply-icon.png?v=3" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/src/site.js"></script>
+    <script type="module" src="/src/pricing.js"></script>
+  </head>
+  <body data-page="pricing">
+    <header class="site-header">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span><span>Sonus</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="/" data-nav="home">Home</a>
+        <a href="/download/" data-nav="download">Download</a>
+        <a href="/patch-notes/" data-nav="patch-notes">Patch notes</a>
+      </nav>
+      <div class="site-actions" id="site-nav-actions"></div>
+    </header>
+
+    <main class="pricing-shell pricing-redesign">
+      <section class="pricing-hero">
+        <p class="section-kicker">Pricing</p>
+        <h1>Simple, honest pricing.</h1>
+        <p>One lifetime licence for the desktop sample browser. No subscription, no surprise renewal, no filler tiers.</p>
+      </section>
+
+      <section class="pricing-grid-v2" aria-label="Sonus pricing">
+        <article class="pricing-card-old pricing-card-free">
+          <div class="pricing-name">Free</div>
+          <div class="pricing-desc">For browsing before you buy</div>
+          <div class="pricing-price">
+            <span class="pricing-currency">$</span>
+            <span class="pricing-amount">0</span>
+          </div>
+          <div class="pricing-note">Download and create an account</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features-old">
+            <li><span class="chk">✓</span> Account and dashboard access</li>
+            <li><span class="chk">✓</span> Download page access</li>
+            <li><span class="chk">✓</span> Profile and machine management</li>
+            <li><span class="chk">✓</span> Upgrade whenever you are ready</li>
+          </ul>
+          <a class="btn btn-muted form-submit" href="/signup/">Create account</a>
+        </article>
+
+        <article class="pricing-card-old pricing-card-old-featured">
+          <span class="pricing-badge">Pro</span>
+          <div class="pricing-name">Lifetime</div>
+          <div class="pricing-desc">For serious producers</div>
+          <div class="pricing-price">
+            <span class="pricing-currency">$</span>
+            <span class="pricing-amount">49</span>
+          </div>
+          <div class="pricing-note">One-time payment · 1 licence</div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features-old">
+            <li><span class="chk">✓</span> AI-powered sample search</li>
+            <li><span class="chk">✓</span> Unlimited sample collections</li>
+            <li><span class="chk">✓</span> Stack mode for layered preview</li>
+            <li><span class="chk">✓</span> BPM, key and scale detection</li>
+            <li><span class="chk">✓</span> Waveform view and fast auditioning</li>
+            <li><span class="chk">✓</span> Smart tags for faster filtering</li>
+            <li><span class="chk">✓</span> Drag and drop into any DAW</li>
+            <li><span class="chk">✓</span> Future updates included</li>
+            <li><span class="chk">✓</span> Two machine slots per account</li>
+          </ul>
+          <button class="btn btn-accent form-submit btn-lg pricing-buy-btn" type="button" data-buy-sonus>Buy lifetime licence</button>
+          <p class="form-status" id="pricing-status" aria-live="polite"></p>
+          <p class="pricing-auth-note" data-pricing-auth>Already have an account? <a href="/login/">Log in</a> before checkout. New here? <a href="/signup/">Create an account</a>.</p>
+        </article>
+      </section>
+
+      <section class="pricing-faq" aria-label="Frequently asked questions">
+        <div class="section-heading">
+          <p class="section-kicker">FAQ</p>
+          <h2>Before you buy.</h2>
+        </div>
+        <div class="faq-grid">
+          <article>
+            <h3>Is this a subscription?</h3>
+            <p>No. This is a one-time $49 licence for Sonus desktop access.</p>
+          </article>
+          <article>
+            <h3>Where are my samples stored?</h3>
+            <p>Your audio files stay on your machine and drives. Sonus stores account, licence, and machine status online, while the sample library stays local.</p>
+          </article>
+          <article>
+            <h3>How many machines can I use?</h3>
+            <p>Each account can register two machines. You can remove a machine from the dashboard to free a slot.</p>
+          </article>
+          <article>
+            <h3>What happens after payment?</h3>
+            <p>The website marks your account as premium, then the desktop app unlocks when you sign in with the same account.</p>
+          </article>
+          <article>
+            <h3>Can I download before buying?</h3>
+            <p>Yes. You can create an account and download the app before buying. Premium features unlock after purchase.</p>
+          </article>
+          <article>
+            <h3>Do I need internet every time?</h3>
+            <p>You need internet for account and licence checks. Your samples and analysis data remain local.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <a class="brand small" href="/">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span>Sonus</span>
+        </a>
+        <span>© 2026 Sonus. All rights reserved.</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/download/">Download</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/cookies/">Cookies</a>
+        <a href="/refund/">Refunds</a>
+        <a href="/legal/">Legal Notice</a>
+      </nav>
+    </footer>
+  </body>
+</html>
