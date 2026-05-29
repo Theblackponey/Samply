@@ -60,7 +60,7 @@ const configuredSiteUrl = cleanBaseUrl(siteConfig.siteUrl || siteConfig.baseUrl 
 const configuredDownloadPath = cleanPath(siteConfig.downloadPath, "/download/");
 const configuredPricingPath = cleanPath(siteConfig.pricingPath, "/pricing/");
 
-const host = process.env.HOST || "127.0.0.1";
+const host = process.env.HOST || (process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1");
 const port = Number(process.env.PORT || 4173);
 const siteUrl = cleanBaseUrl(configuredSiteUrl || `http://${host}:${port}`);
 const siteDownloadUrl = `${siteUrl}${configuredDownloadPath}`;
