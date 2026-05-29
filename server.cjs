@@ -146,6 +146,7 @@ const mimeTypes = new Map([
   [".webp", "image/webp"],
   [".ico", "image/x-icon"],
   [".ttf", "font/ttf"],
+  [".woff2", "font/woff2"],
   [".dmg", "application/octet-stream"],
   [".exe", "application/vnd.microsoft.portable-executable"],
   [".zip", "application/zip"],
